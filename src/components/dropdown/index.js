@@ -155,6 +155,16 @@ export default class Dropdown extends PureComponent {
     useNativeDriver: PropTypes.bool,
   };
 
+  static getDerivedStateFromProps(props, state) {
+    if (props.value !== state.value) {
+      return {
+        value: props.value,
+      };
+    }
+
+    return null;
+  }
+
   constructor(props) {
     super(props);
 
@@ -186,12 +196,6 @@ export default class Dropdown extends PureComponent {
       modal: false,
       value,
     };
-  }
-
-  componentWillReceiveProps({ value }) {
-    if (value !== this.props.value) {
-      this.setState({ value });
-    }
   }
 
   componentDidMount() {
